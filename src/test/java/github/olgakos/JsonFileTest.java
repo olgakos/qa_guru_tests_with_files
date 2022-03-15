@@ -1,7 +1,8 @@
 package github.olgakos;
 
 import github.olgakos.domain.Student; //для JSON
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper; //it's work
+//import org.codehaus.jackson.map.ObjectMapper; //doesn't work
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths; //для JSON

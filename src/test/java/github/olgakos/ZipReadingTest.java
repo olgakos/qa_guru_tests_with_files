@@ -1,10 +1,8 @@
 package github.olgakos;
 
-import com.codeborne.xlstest.XLS;
 import org.junit.jupiter.api.Test;
-
-import com.codeborne.pdftest.PDF;
 import com.codeborne.xlstest.XLS;
+import com.codeborne.pdftest.PDF;
 import com.opencsv.CSVReader;
 
 import java.io.InputStream;
@@ -24,7 +22,6 @@ public class ZipReadingTest {
             XLS_FILE = "SampleXLSXfile.xlsx",
             PDF_FILE = "SiegfriedSassoon.pdf";
 
-
     @Test
     void parseZipTest() throws Exception {
         ZipFile zf = new ZipFile("src/test/resources/files/some-files-in-zip3.zip");
@@ -43,24 +40,25 @@ public class ZipReadingTest {
         }
     }
 
-    void parsePdfTest (InputStream pdfFile) throws Exception {
+//работает:
+       void parsePdfTest (InputStream pdfFile) throws Exception {
         PDF pdf = new PDF(pdfFile);
         assertThat(pdf.text).contains(
-                "For now we've marched to a green, trenchless land"
-        );
+                "For now we've marched to a green, trenchless land");
+    }
 
-        // не работает, если в запросе больше 1 строки? todo
-
-        /*
+    // todo
+    //НЕ работает:
+    //если в запросе к PDF больше 1 строки (склеенные)
+    //(при запуске заменить parsePdfTest2 на parsePdfTest)
+    void parsePdfTest2 (InputStream pdfFile) throws Exception {
+        PDF pdf = new PDF(pdfFile);
         assertThat(pdf.text).contains(
-                "For now we've marched to a green, trenchless land" +
+                "For now we've marched to a green, trenchless land\n" +
                   "Twelve miles from battering guns: along the grass\n" +
                   "Brown lines of tents are hives for snoring men;\n" +
                   "Wide, radiant water sways the floating sky\n" +
-                  "Below dark, shivering trees. And living-clean"
-                 );
-
-         */
+                  "Below dark, shivering trees. And living-clean");
     }
 
     void parseXlsTest (InputStream xlsFile) throws Exception {
