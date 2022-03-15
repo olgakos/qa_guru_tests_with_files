@@ -9,6 +9,7 @@ import java.nio.file.Paths; //для JSON
 import static org.assertj.core.api.Assertions.assertThat; //?
 
 public class JsonFileTest {
+
     ClassLoader classLoader = getClass().getClassLoader();
 
     @Test
@@ -24,5 +25,4 @@ public class JsonFileTest {
         assertThat(student.books).contains("Memoirs of a Fox-Hunting Man",
                 "Counter-Attack and Other Poems");
     }
-
 }
