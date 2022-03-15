@@ -1,0 +1,10 @@
+{
+  "id": "01",
+  "name": "Siegfried",
+  "lastname": "Sassoon",
+  "isEnglishLiterature": true,
+  "books": [
+    "Memoirs of a Fox-Hunting Man",
+    "Counter-Attack and Other Poems"
+  ]
+}
