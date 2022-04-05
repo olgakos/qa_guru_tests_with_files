@@ -23,20 +23,20 @@ public class PdfParsingTest {
         assertThat(pdf.text).contains("Pro Git");
     }
 
-    //тест на ЗАГРУЗКУ PDF файла из resources (?) todo
-
+    //тест на ЗАГРУЗКУ PDF файла из resources todo
     @Test
     void parsePdfFromResourcesTest() throws Exception {
         InputStream is = classLoader.getResourceAsStream("files/SiegfriedSassoon.pdf");
         PDF reader = new PDF(is);
         assertThat(reader.text).contains("Fledged with forest May has crowned.");
+        //assertThat(reader.text).contains("Fledged1 with forest May has crowned."); // заведомо ошибка (ок)
     }
 
     // todo
     //НЕ работает:
-    //если в запросе к PDF больше 1 строки (склеенные)
+    //если в запросе к PDF больше 1 строки (склеенные), упадет из-за символа \n"
     @Test
-    void parsePdfFromResourcesTestFail() throws Exception {
+    void parsePdfFromResourcesTest_Fail() throws Exception {
         InputStream is = classLoader.getResourceAsStream("files/SiegfriedSassoon.pdf");
         PDF pdfFile = new PDF(is);
         assertThat(pdfFile.text).contains(
@@ -44,6 +44,14 @@ public class PdfParsingTest {
                         "Of my quiet attic room.\n" +
                         "France goes rolling all around,\n" +
                         "Fledged with forest May has crowned.");
+    }
+
+    @Test
+    void parsePdfFromResourcesTest_OneString() throws Exception {
+        InputStream is = classLoader.getResourceAsStream("files/SiegfriedSassoon.pdf");
+        PDF pdfFile = new PDF(is);
+        assertThat(pdfFile.text).contains(
+                "Here I'm sitting in the gloom");
     }
 
     /*

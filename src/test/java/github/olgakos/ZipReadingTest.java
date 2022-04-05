@@ -29,19 +29,19 @@ public class ZipReadingTest {
             ZipEntry entryFile = iter.nextElement();
             if (entryFile.getName().contains("pdf")) {
                 assertThat(entryFile.getName()).isEqualTo(PDF_FILE);
-                parsePdfTest(zf.getInputStream(entryFile));
+                parsePdfTest1(zf.getInputStream(entryFile)); //PDF
             } else if (entryFile.getName().contains("xlsx")) {
                 assertThat(entryFile.getName()).isEqualTo(XLS_FILE);
-                parseXlsTest(zf.getInputStream(entryFile));
+                parseXlsTest(zf.getInputStream(entryFile)); //XLSX
             } else if (entryFile.getName().contains("csv")) {
                 assertThat(entryFile.getName()).isEqualTo(CSV_FILE);
-                parseCsvTest(zf.getInputStream(entryFile));
+                parseCsvTest(zf.getInputStream(entryFile)); //CSV
             }
         }
     }
 
 //работает:
-       void parsePdfTest (InputStream pdfFile) throws Exception {
+       void parsePdfTest1 (InputStream pdfFile) throws Exception {
         PDF pdf = new PDF(pdfFile);
         assertThat(pdf.text).contains(
                 "For now we've marched to a green, trenchless land");
@@ -49,9 +49,9 @@ public class ZipReadingTest {
 
     // todo
     //НЕ работает:
-    //если в запросе к PDF больше 1 строки (склеенные)
-    //(при запуске заменить parsePdfTest2 на parsePdfTest)
-    void parsePdfTest2 (InputStream pdfFile) throws Exception {
+    //если в запросе к PDF больше 1 строки (склеенные), упадет из-за символа \n"
+    //(для запуска заменить ИМЯ parsePdfTest_2FAIL на parsePdfTest1)
+    void parsePdfTest_2FAIL (InputStream pdfFile) throws Exception {
         PDF pdf = new PDF(pdfFile);
         assertThat(pdf.text).contains(
                 "For now we've marched to a green, trenchless land\n" +
