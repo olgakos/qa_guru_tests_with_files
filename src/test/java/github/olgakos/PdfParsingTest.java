@@ -15,9 +15,10 @@ public class PdfParsingTest {
     @Test
     void parsePdfDownloadEbook() throws Exception {
         Selenide.open("https://git-scm.com/book/en/v2");
-        File pdfDownload = Selenide.$(".ebooks a[href*='download/2.1.338/progit.pdf']").download();
+        //File pdfDownload = Selenide.$(".ebooks a[href*='download/2.1.339/progit.pdf']").download();
+        File pdfDownload = Selenide.$("a[href='https://github.com/progit/progit2/releases/download/2.1.339/progit.pdf']").download();
         PDF pdf = new PDF(pdfDownload);
-        //assertThat(pdf.author).contains("Scott Chacon, Ben Straub");
+        assertThat(pdf.author).contains("Scott Chacon, Ben Straub");
         //assertThat(pdf.numberOfPages).isEqualTo(519);
         //assertThat(pdf.text).contains("Война и мир"); //ожидаемо-ошибочный
         assertThat(pdf.text).contains("Pro Git");
